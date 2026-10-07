@@ -207,7 +207,7 @@ jobs:
     needs:
       - client-trivy-fs
       - checkov-k8s
-      - checkov-dockerfile
+      - checkov-docker
       - checkov-terraform
 
     defaults:
@@ -238,7 +238,7 @@ jobs:
     needs:
       - server-trivy-fs
       - checkov-k8s
-      - checkov-dockerfile
+      - checkov-docker
       - checkov-terraform
 
     defaults:
