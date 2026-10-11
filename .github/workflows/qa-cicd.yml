@@ -107,48 +107,41 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
 
-      - name: Install Trivy
-        uses: aquasecurity/setup-trivy@v0.2.6
+      - name: Trivy Scan for Client (Table)
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
-          version: latest
-          cache: true
-
-      - name: Verify Trivy installation
-        run: |
-          trivy --version
-          which trivy
-      
-      - name: Run Trivy FS scan on client (JSON)
-        run: |
-          trivy fs ./client \
-            --format json \
-            --output client-trivy-fs-report.json \
-            --severity HIGH,CRITICAL \
-            --ignore-unfixed \
-            --exit-code 0
-
-      - name: Run Trivy FS scan on client (TABLE)
-        run: |
-          trivy fs ./client \
-            --format table \
-            --severity HIGH,CRITICAL \
-            --ignore-unfixed \
-            --exit-code 0 > client-trivy-fs-report.txt    
-  
-      - name: Upload Client Trivy JSON report
+          format: 'table'
+          exit-code: '0' 
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+          output: 'trivy-client-report.txt'
+          
+      - name: Upload Trivy Client Report
         uses: actions/upload-artifact@v4
         with:
-          name: client-trivy-fs-json-report
-          path: client-trivy-fs-report.json
+          name: trivy-client-report
+          path: trivy-client-report.txt
           if-no-files-found: warn
-
-      - name: Upload Client Trivy TABLE report
+          
+      - name: Trivy Scan for Client (Json)
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          format: 'json'
+          exit-code: '0'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+          output: 'trivy-client-report.json'
+          
+      - name: Upload Trivy Client Report
         uses: actions/upload-artifact@v4
         with:
-          name: client-trivy-fs-table-report
-          path: client-trivy-fs-report.txt
+          name: trivy-client-report
+          path: trivy-client-report.json
           if-no-files-found: warn
 
+            
   server-trivy-fs:
     name: Server Trivy FS Scan
     runs-on: ubuntu-latest
