@@ -129,6 +129,9 @@ jobs:
       - name: Trivy Scan for Client (Json)
         uses: aquasecurity/trivy-action@v0.36.0
         with:
+          scanners: 'vuln'
+          scan-type: 'fs'
+          scan-ref: '.'
           format: 'json'
           exit-code: '0'
           ignore-unfixed: true
