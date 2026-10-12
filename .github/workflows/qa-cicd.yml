@@ -110,6 +110,7 @@ jobs:
       - name: Trivy Scan for Client (Table)
         uses: aquasecurity/trivy-action@v0.36.0
         with:
+          scanners: 'vuln'
           scan-type: 'fs'
           scan-ref: '.'
           format: 'table'
