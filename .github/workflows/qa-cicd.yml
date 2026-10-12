@@ -113,14 +113,13 @@ jobs:
           format: 'table'
           exit-code: '0' 
           ignore-unfixed: true
-          vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
           output: 'trivy-client-report.txt'
           
       - name: Upload Trivy Client Report
         uses: actions/upload-artifact@v4
         with:
-          name: trivy-client-report
+          name: trivy-client-report-table
           path: trivy-client-report.txt
           if-no-files-found: warn
           
@@ -130,14 +129,13 @@ jobs:
           format: 'json'
           exit-code: '0'
           ignore-unfixed: true
-          vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
           output: 'trivy-client-report.json'
           
       - name: Upload Trivy Client Report
         uses: actions/upload-artifact@v4
         with:
-          name: trivy-client-report
+          name: trivy-client-report-json
           path: trivy-client-report.json
           if-no-files-found: warn
 
