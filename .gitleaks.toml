@@ -2,6 +2,9 @@
 title = "3-Tier-Application Gitleaks Configuration"
 [extend]
 useDefault = true
-[[allowlists]]
-description = "Exclude SonarQube project properties"
-paths = ['''(^|/)sonar-project\.properties$''']
+[allowlist]
+description = "Ignore the public SonarQube project key"
+condition = "AND"
+paths = ['''^sonar-project\.properties$''']
+regexTarget = "line"
+regexes = ['''^sonar\.projectKey=3-Tier-Application\s*$''']
