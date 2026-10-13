@@ -8,6 +8,10 @@ on:
       - client/**
       - server/**
       - .github/workflows/qa-cicd.yml
+      - '.gitleaks.toml'
+      - 'sonar-project.properties'
+  workflow_dispatch:
+  
 permissions:
   contents: write
   id-token: write
