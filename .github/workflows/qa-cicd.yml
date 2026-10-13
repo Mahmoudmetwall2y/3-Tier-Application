@@ -199,7 +199,7 @@ jobs:
 
 
   client-lint:
-    name: Client Lint
+    name: Client Lint (1)
     runs-on: ubuntu-latest
     needs:
       - client-trivy-fs
